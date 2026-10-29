@@ -1,0 +1,60 @@
+================================================================================
+           CREDENCIALES DE ACCESO - SISTEMA DE GESTIÓN DE MUEBLERÍA
+================================================================================
+
+1. ACCESO A LA APLICACIÓN WEB
+--------------------------------------------------------------------------------
+URL Local:    http://127.0.0.1:8000  (o http://localhost:8000)
+URL Laragon:  http://dev_muebleria.test (si tienes activado Auto Virtual Hosts)
+
+--------------------------------------------------------------------------------
+| ROL               | NOMBRE              | CORREO ELECTRÓNICO       | CONTRASEÑA  |
+--------------------------------------------------------------------------------
+| Administrador     | John Doe (Gerente)  | admin@muebleria.com      | admin123    |
+| Vendedor          | Sofia Ramos         | vendedor@muebleria.com   | vendedor123 |
+| Almacenero        | Miguel Torres       | almacen@muebleria.com    | almacen123  |
+--------------------------------------------------------------------------------
+
+DETALLE DE PERMISOS POR ROL:
+- Administrador:
+  Acceso total e irrestricto a todos los módulos: Dashboard, Inventario y Kardex,
+  Ventas POS y Facturación, Producción y Fabricación, Compras, Proveedores,
+  Clientes CRM, Caja y Finanzas, Reportes Gerenciales, Gestión de Usuarios,
+  Configuración de Empresa y Respaldos/Backups de BD.
+
+- Vendedor:
+  Acceso a Dashboard de ventas, Catálogo de productos (consulta), Módulo de
+  Ventas POS, Facturación / Boletas / Cotizaciones / Notas de Venta, Registro
+  de Clientes y Cuentas por Cobrar, y Coordinación de Despachos.
+
+- Almacenero:
+  Acceso a Dashboard, Catálogo de Productos y Categorías, Movimientos de Stock,
+  Kardex valorizado, Ajustes de Inventario, Módulo de Producción / Fabricación
+  por etapas, Órdenes de Compra y Recepción de Mercadería de Proveedores.
+
+- Contador (Rol disponible en el sistema):
+  Acceso a Dashboard, Caja y Finanzas (apertura/cierre, arqueos, gastos menores),
+  Cuentas por Pagar y Amortizaciones a Proveedores, y Reportes Financieros.
+  (Puede asignarse a cualquier usuario desde el panel de Usuarios).
+
+
+2. CREDENCIALES DE BASE DE DATOS (LOCAL)
+--------------------------------------------------------------------------------
+Gestor de BD:        MySQL 8.0+ / MariaDB 10.4+
+Host:                127.0.0.1 (localhost)
+Puerto:              3306
+Base de Datos:       dev_muebleria
+Usuario:             root
+Contraseña:          (sin contraseña por defecto en Laragon / XAMPP)
+
+
+3. COMANDO PARA RESETEAR O RECREAR LOS USUARIOS DE PRUEBA
+--------------------------------------------------------------------------------
+Si deseas restablecer los usuarios y datos semilla originales, ejecuta en la terminal:
+  php artisan migrate:fresh --seed
+
+Para crear un nuevo usuario administrador directamente desde la consola interactiva:
+  php artisan tinker
+  >>> $user = App\Models\User::create(['name'=>'Mi Nombre', 'email'=>'miemail@empresa.com', 'password'=>Hash::make('miclave123'), 'is_active'=>true]);
+  >>> $user->assignRole('Administrador');
+================================================================================
